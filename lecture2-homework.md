@@ -13,6 +13,7 @@ template Num2bits (nbits) {
     }
     in === acc;
 }
+
 template IsZero(){
     signal input in;
     signal output out;
@@ -21,6 +22,7 @@ template IsZero(){
     out <== -in*inv + 1;
     in*out===0; 
 }
+
 template IsEqual() {
     signal input in[2];
     signal output out;
