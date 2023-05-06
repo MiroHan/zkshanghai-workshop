@@ -11,30 +11,6 @@ Given integers $x, m$, write $QR(m, x)=1$ if $x$ is a quadratic residue $\bmod m
 
 ## 二次非剩余 Quadratic nonresidue
 
-_假定_：证明者可以为所有 $m, x$ 计算 $QR(m, x)$
-
-_公共输入_：正整数 $m, x$
-
-_目标_：证明者想要说服验证者 $QR(m, x)=0$
-
-::: tip 协议
-
-1. Verifier 在与 $m$ 互质的元素中均匀地随机选取一个 $s \in \mathbb{Z}_{m}$，同时抛硬币 $b \gets_R \{0,1\}$。 设
-    $$
-    y \leftarrow \begin{cases}
-        s^{2} x & \text { if } b=0, \\
-        s^{2} & \text { if } b=1.
-    \end{cases}
-    $$
-    Verifier 将 $y$ 发送给 Prover 并挑战 Prover 以确定 $b$。
-
-2. Prover 计算 $QR(m, y)$ 并将其值发送回 Verifier
-
-3. 如果 Verifier 从 Prover 收到的值确实等于 $b$，则 Verifier 接受； 否则它拒绝。
-
-::::
-
-您需要检查：
 
 - (a) **完备性**：如果 $QR(m, x)=0$ 并且双方都按照协议行事，那么验证者总是接受。
 
@@ -78,40 +54,6 @@ You are asked to check:
 
 ## 二次剩余 Quadratic residue
 
-_公共输入_：正整数 $m, x$ 且满足 $\operatorname{gcd}(m, x)=1$
-
-_私有输入_：证明者知道一个秘密整数 $s$ 使得 $s^{2} \equiv x \bmod m$
-
-_目标_：证明者想要说服验证者 $QR(m, x)=1$ 而不透露有关 $s$ 的任何信息
-
-（请注意，证明者可以通过向验证者发送 $s$ 轻松说服验证者 $QR(m, x)=1$，但这会完全暴露 $s$。）
-
-::: tip 协议
-
-1. Prover 在与 $m$ 互质的剩余中随机选择一个均匀的 $t \in \mathbb{Z}_{m}$。 Prover 将 $y \leftarrow x t^{2} \bmod m$ 发送给 Verifier。
-
-1. Verifier 抛硬币 $b \gets_R \{0,1\}$ 并将 $b$ 发送给 Prover。
-
-1. Prover 收到 $b$ 并将$u$值发送给 Verifier
-    $$
-    u \leftarrow \begin{cases}
-        t & \text { if } b=0, \\
-        s t & \text { if } b=1.
-    \end{cases}
-    $$
-
-1. 验证者接受证明如果
-    $$
-    y \equiv \begin{cases}
-        u^2 x \bmod m & \text { if } b=0, \\
-        u^2 \bmod m & \text { if } b=1.
-    \end{cases}
-    $$
-    否则拒绝。
-
-::::
-
-您需要检查：
 
 - (a) **完备性**：如果双方都按照协议行事，那么 Verifier 总是接受。
 
